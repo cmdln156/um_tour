@@ -1,0 +1,362 @@
+<!-- Based on simulated location example: https://codepen.io/cmcfadden/pen/QWbjzGg -->
+<!-- Updated for AR.js 3. Was using AR.js 2.1.8 previously, which is why the maxDistance parameter wasn't working. -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>University of Manitoba Lost Places AR Tour</title>
+
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script> 
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@1.0.0/dist/aframe-look-at-component.min.js"></script> 
+
+    <!--------------------------------------------------------------------------->    
+    
+    <!-- New Leaflet 1.8.0 version -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            width: 100%;
+            height: 45%;
+        }
+        #myEmbeddedScene {
+            width: 100%;
+            height: 55%;
+        }
+    </style>
+
+  <!--------------------------------------------------------------------------->
+
+  <link rel="stylesheet" href="https://opengeo.tech/maps/leaflet-compass/src/leaflet-compass.css">
+
+</head>
+
+
+<body style='margin: 0; overflow: hidden;'>
+
+
+<div id="myEmbeddedScene">
+    <a-scene vr-mode-ui="enabled: false" embedded 
+        arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
+
+        <!-- <a-text value="Practice House" gps-entity-place="latitude: 49.80862; longitude: -97.130091;" position="0 320 0"
+            rotation="0 0 0" font="roboto" color="white" look-at="#camera" side="double" align="center"
+            width="100" transparent="false" opacity="1.0">
+        </a-text>  -->
+
+
+        <!-- Using the asset management system for images. -->
+        <a-assets>
+            <img id="Bison_Gardens_img" src="assets/Bison_Gardens-feathered_200px.jpg"></img_id>
+            <img id="Alumni_House_img" src="assets/Alumni_House-greysc-old_photo_25px.png"></img_id>
+            <img id="Water_Tower_img" src="assets/Water_Tower-feathered_100px.png"></img_id>
+            <img id="Bus_Depot_img" src="assets/Bus_Depot-feathered_40px.jpg"></img_id>
+            <img id="Avenue_of_Elms_img" src="assets/Avenue_of_Elms-feathered_200px.jpg"></img_id>
+            <img id="Arctic_Ice_Plant_img" src="assets/Arctic_Ice_Plant-feathered_300px.jpg"></img_id>
+            <img id="Hut_J_img" src="assets/Hut_J-feathered_25px.jpg"></img_id>
+            <img id="NE_Engineering_img" src="assets/NE_Engineering-greysc-feathered_100px.jpg"></img_id>
+        </a-assets>
+
+        
+        <!-- <a-image src="#Alumni_House_img" gps-entity-place="latitude: 49.80862; longitude: -97.130091;"  look-at="[gps-camera]" position="0 240 0" width="133" height="100"  opacity="0.7"  alpha-test="0.5" shader="standard" transparent="true" visible="" scale = "0.2 0.2 0.2"></a-image> -->
+
+        <!-- School: 49.803551, -97.166274 -->
+        <a-image src="#Alumni_House_img" gps-entity-place="latitude: 49.803551; longitude: -97.166274;"  look-at="[gps-camera]" position="0 220 0" width="133" height="100"  opacity="0.7"  alpha-test="0.5" shader="standard" transparent="true" visible="" scale = "0.2 0.2 0.2"></a-image>
+
+        <a-image src="#Bison_Gardens_img" gps-entity-place="latitude: 49.806167; longitude: -97.132582;"  look-at="[gps-camera]" position="0 240 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
+        <a-image src="#Water_Tower_img" gps-entity-place="latitude: 49.808834; longitude: -97.127798;"  look-at="[gps-camera]" position="0 240 0" width="77" height="100"  opacity="0.8"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
+        <a-image src="#Bus_Depot_img" gps-entity-place="latitude: 49.809889; longitude: -97.133993;"  look-at="[gps-camera]" position="0 240 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
+        <a-image src="#Avenue_of_Elms_img" gps-entity-place="latitude: 49.809121; longitude: -97.134047;"  look-at="[gps-camera]" position="0 240 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
+        <a-image src="#Arctic_Ice_Plant_img" gps-entity-place="latitude: 49.805743; longitude: -97.13164;"  look-at="[gps-camera]" position="0 240 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
+        <a-image src="#Hut_J_img" gps-entity-place="latitude: 49.807581; longitude: -97.132917;"  look-at="[gps-camera]" position="0 240 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
+        <a-image src="#NE_Engineering_img" gps-entity-place="latitude: 49.808609; longitude: -97.133951;"  look-at="[gps-camera]" position="0 240 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
+
+        <!-- local image paths don't work. Must use https://  URLs. because of cross-origin policy. -->        
+        
+        <!-- <a-camera id="camera"
+            gps-camera="maxDistance: 6000; simulateLatitude:  49.808967; simulateLongitude: -97.130411; simulateAltitude: 232;"
+            rotation-reader 
+            far="100000" 
+            position-reader>
+        </a-camera> -->
+
+        <a-camera id="camera"
+            gps-camera="maxDistance: 200"
+            rotation-reader 
+            far="100000">
+        </a-camera>
+
+    </a-scene>
+</div>
+
+
+    <!--------------------------------------------------------------------------->
+    <!-- Show Leaflet map -->
+    <!-- from real-time_locationtracker.html -->
+    
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="https://opengeo.tech/maps/leaflet-compass/src/leaflet-compass.js"></script>
+    <script>
+        var map_init = L.map('map', {
+            minzoom: 5,
+            maxzoom: 18,
+            zoom: 15,
+            center: [49.809596, -97.132699],
+        });
+
+        
+        //var corner1 = L.latLng( 49.802780, -97.138176), corner2 = L.latLng( 49.813876, -97.131187)
+        var corner1 = [49.802780, -97.138176], corner2 = [49.813876, -97.131187]
+
+        bounds = L.latLngBounds(corner1, corner2)
+        map_init.fitBounds(bounds)
+        map_init.flyTo([49.809596, -97.132699],12)
+
+        var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map_init);
+        
+        L.Control.geocoder().addTo(map_init);
+
+        if (!navigator.geolocation) {
+            console.log("Your browser doesn't support geolocation feature!")
+        } else {
+            setInterval(() => {
+                navigator.geolocation.getCurrentPosition(getPosition)
+            }, 10000);
+        };
+                
+        //Add compass rose
+        //var comp = new L.Control.Compass({autoActive: true, showDigit:true});
+        //map_init.addControl(comp)
+
+        var marker, facing_alumni_house, facing_admin_bldg, facing_tache_hall, facing_tier, facing_hutj, facing_home_ec, facing_bison_gardens, facing_buller, facing_dairy_science, facing_stock_judging_pavilion, facing_ice_plant, facing_bison_bldg, facing_bison_east_gym, facing_bus_depot, facing_NE_eng_bldg, circle, lat,long, accuracy, altitude;
+
+        //Latitude and longitude of placemarks.
+        var facing_alumni_house_coords, facing_admin_bldg_coords,facing_tache_hall_coords,facing_tier_coords,facing_hutj_coords,facing_home_ec_coords,facing_bison_gardens_coords,facing_buller_coords,facing_dairy_science_coords,facing_stock_judging_pavilion_coords,facing_ice_plant_coords,facing_bison_bldg_coords,facing_bison_east_gym_coords,facing_bus_depot_coords,facing_NE_eng_bldg_coords;
+
+        facing_alumni_house_coords = [49.808967, -97.130411]
+        facing_admin_bldg_coords = [49.809121, -97.134047]
+        facing_tache_hall_coords = [49.808449, -97.13171]
+        facing_tier_coords = [49.809145, -97.131294]
+        facing_hutj_coords = [49.807777, -97.13304]
+        facing_home_ec_coords = [49.810617, -97.132401]
+        facing_bison_gardens_coords = [49.805772, -97.132497]
+        facing_buller_coords = [49.810295, -97.133286]
+        facing_dairy_science_coords = [49.807752, -97.133312]
+        facing_stock_judging_pavilion_coords = [49.807502, -97.134154]
+        facing_ice_plant_coords = [49.806747, -97.131239]
+        facing_bison_bldg_coords = [49.808663, -97.135675]
+        facing_bison_east_gym_coords = [49.809909, -97.136263]
+        facing_bus_depot_coords = [49.809832, -97.133768]
+        facing_NE_eng_bldg_coords = [49.80935, -97.133068]
+
+        facing_alumni_house = L.marker(facing_alumni_house_coords).addTo(map_init)
+        facing_admin_bldg = L.marker(facing_admin_bldg_coords).addTo(map_init)
+        facing_tache_hall = L.marker(facing_tache_hall_coords).addTo(map_init)
+        facing_tier = L.marker(facing_tier_coords).addTo(map_init)
+        facing_hutj = L.marker(facing_hutj_coords).addTo(map_init)
+        facing_home_ec = L.marker(facing_home_ec_coords).addTo(map_init)
+        facing_bison_gardens = L.marker( facing_bison_gardens_coords).addTo(map_init)
+        facing_buller = L.marker(facing_buller_coords).addTo(map_init)
+        facing_dairy_science = L.marker(facing_dairy_science_coords).addTo(map_init)
+        facing_stock_judging_pavilion = L.marker(facing_stock_judging_pavilion_coords).addTo(map_init)
+        facing_ice_plant = L.marker(facing_ice_plant_coords).addTo(map_init)
+        facing_bison_bldg = L.marker(facing_bison_bldg_coords).addTo(map_init)
+        facing_bison_east_gym = L.marker(facing_bison_east_gym_coords).addTo(map_init)
+        facing_bus_depot = L.marker( facing_bus_depot_coords).addTo(map_init)
+        facing_NE_eng_bldg = L.marker(facing_NE_eng_bldg_coords).addTo(map_init)
+    
+        //Specify bounding box of central part of campus and centre map on it.
+        var corner1 = L.latLng( 49.802780, -97.138176), corner2 = L.latLng( 49.813876, -97.131187)
+        
+        var bounds = L.latLngBounds(corner1, corner2)
+        //map_init.fitBounds(bounds)
+        map_init.flyTo(L.latLng(49.809596, -97.132699))
+
+        //Popups for markers.
+        facing_alumni_house.bindPopup("<strong>Practice House</strong><br><p>This stately Georgian-style 2-1/2 storey brick house was built in 1939 to serve as a 'practice house' for students in Home Economics to learn household management and child-care. Third-year Home Ec students lived in the house for a month and took turns cooking, cleaning, and taking care of an infant that was 'borrowed' from the Child Welfare Assocation. The house served in this role for nearly 20 years, when it became a residence for university adminstrators. In 1970, it was converted into offices for the Employee Relations Department, and ten years later, it became home to the Alumni Association. The house was torn down in the summer of 2009 to make way for the ARTLab.</p>", {maxWidth: 250})
+
+        facing_alumni_house.getPopup().on('remove', function() {
+            //map_init.fitBounds(bounds)
+            map_init.panTo(facing_alumni_house_coords)
+        });
+
+        facing_admin_bldg.bindPopup("<strong>Administration Building</strong><br><p>Chancellor Matheson Road used to extend all the way to the Administration Building, but the segment of the road between the building and University Crescent was closed off when University Centre was built in 1969, and further blocked when the Administrative Studies Complex (now Extended Education) and the Frank Kennedy Centre were constructed in the early '70s. The road closure resulted in the loss of many elm trees that were a part of the memorial Avenue of Elms. The trees had been planted in the early 1920s in honour of students and staff who died in WW I.</p><p>Most of the surviving elms between Pembina Hwy. and University Crescent were replaced with new trees as part of a reforestation plan in 2014.</p>", {maxWidth: 250})
+        
+        facing_admin_bldg.getPopup().on('remove', function() {
+            map_init.panTo(facing_admin_bldg_coords)
+        });
+
+        facing_tache_hall.bindPopup("<strong>Tache Hall</strong><br>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?", {maxWidth: 250})
+        
+        facing_tache_hall.getPopup().on('remove', function() {
+            map_init.panTo(facing_tache_hall_coords)
+        });
+
+        facing_tier.bindPopup("<strong>Tier Building</strong><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vestibulum felis et nunc ultricies, quis sagittis sapien porta. Sed in lobortis sem, nec pretium dui. Nulla vehicula eleifend mi, vitae facilisis odio luctus et. Nulla ultrices rhoncus nisl, ac tempor dui sodales non. Quisque aliquet rutrum eros sit amet bibendum. Curabitur consequat turpis tortor, mattis pellentesque libero vestibulum id. Donec sit amet ipsum urna. Sed ut urna a sem fringilla rutrum ut sit amet enim. Cras a laoreet tortor. Duis euismod dui sit amet felis mollis, at faucibus libero pretium. Praesent nec finibus nibh. Fusce non turpis consequat, tristique leo.", {maxWidth: 250})
+        
+        facing_tier.getPopup().on('remove', function() {
+            map_init.panTo(facing_tier_coords)
+        });
+
+        facing_hutj.bindPopup("<strong>Hut J</strong><br><p>Hut J, on the site of the present Arthur Mauro residence, was built during WW II to serve as a cafeteria, since Taché Hall (where the dining area was normally located) had been commandeered by the military. One side of the cafeteria was for students and the other side for staff. Although it was intended as a temporary building, constructed with cheap simulated brick siding, Hut J lasted for over 40 years, despite being apparently condemned twice. After the war, it was used for classes by the Faculty of Education, and then it acted as studio space for the Faculty of Architecture. Hut J was torn down in the '80s.</p><p>Hut J was one of several temporary buildings constructed during WW II. Another hut was on the site of the present-day Mary Speechly residence and was used by the Faculty of Pharmacy. There were several more huts near the river, one of which served as the Faculty Club. All of them are gone now.</p>", {maxWidth: 250})
+        
+        facing_hutj.getPopup().on('remove', function() {
+            map_init.panTo(facing_hutj_coords)
+        });
+
+        facing_home_ec.bindPopup("<strong>Home Economics Building</strong><br>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?", {maxWidth: 200})
+        
+        facing_home_ec.getPopup().on('remove', function() {
+            map_init.panTo(facing_home_ec_coords)
+        });
+
+        facing_bison_gardens.bindPopup("<strong>Bison Gardens</strong><br><p>Looking like an oblong UFO from the sky, Bison Gardens was originally a skating rink at the old River Park (in the Riverview neighbourhood). The military bought it during WW II, had it dismantled, and floated the pieces up the Red River to the campus. There was one slight hitch: the giant support beams for the roof couldn't navigate some of the narrow bends in the river, so they ended up being transported by truck.</p><p>During the war, the building was used as a drill hall by the military. Afterwards, it was converted to classroom space for a few years and then it was used as storage. It was turned back into a skating rink in the 1950s.</p><p>Bison Gardens had a bit of a rodent problem -- it wasn't uncommon to find dead rats stuck to the ice in the morning. The chilly facility was also purportedly used for storing monkey cadavers for research use!</p><p>The building was torn down in 1982 and replaced by the Max Bell Centre.</p>", {maxWidth: 250})
+        
+        facing_bison_gardens.getPopup().on('remove', function() {
+            map_init.panTo(facing_bison_gardens_coords)
+        });
+
+        facing_buller.bindPopup("<strong>Buller Building</strong><br>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?", {maxWidth: 250})
+        
+        facing_buller.getPopup().on('remove', function() {
+            map_init.panTo(facing_buller_coords)
+        });
+
+        facing_dairy_science.bindPopup("<strong>Dairy Science</strong><br>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?", {maxWidth: 250})
+        
+        facing_dairy_science.getPopup().on('remove', function() {
+            map_init.panTo(facing_dairy_science_coords)
+        });
+
+        facing_stock_judging_pavilion.bindPopup("<strong>Stock Judging Pavilion</strong><br>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?", {maxWidth: 250})
+        
+        facing_stock_judging_pavilion.getPopup().on('remove', function() {
+            map_init.panTo(facing_stock_judging_pavilion_coords)
+        });
+
+        facing_ice_plant.bindPopup("<strong>Arctic Ice Plant</strong><br><p>Back in the days before fridges, people had iceboxes in their homes, which required a daily delivery of ice. One local ice supplier was the Arctic Ice Company, which had an ice cutting and storage facility here near the river starting in the early 1910s. Ice was cut from the river in the winter and moved on a conveyor system to a huge warehouse where they were packed in sawdust and stored for later sale.<p><p>The company initially cut ice near the Norwood bridge, but as the water became increasingly polluted due to sewers emptying into the river, the company moved its cutting operations further south to this location.</p><p>Arctic Ice closed its facility here in the mid-1930s and the property was bought by the U of M in 1939 for $1,100.</p>", {maxWidth: 250})
+        
+        facing_ice_plant.getPopup().on('remove', function() {
+            map_init.panTo(facing_ice_plant_coords)
+        });
+
+        facing_bison_bldg.bindPopup("<strong>Students' Union Building</strong><br><p>On the site of the current parkade and the Helen Glass Building, the old Students' Union Building (or Bison Building as it was later called) opened in the fall of 1952. It replaced Taché Hall as the hub of student activities on campus. One wing originally housed the offices of UMSU, while the other wing contained the cafeteria, council chamber, meeting rooms, and a lounge. The building was also used for exams and convocation.  The large grey structure behind the building housed the east and west gyms, which were built from a war-time aircraft hangar.</p><p>The building's function was replaced by University Centre in 1969. It then became home to the UMSU Print Shop, the School of Nursing, and a computer lab. In the mid-'70s, the west gym was converted to office space for the Departments of Landscape Architecture and City Planning. Bison East Gym continued to be used for sports until 1998 when it was replaced by the Investor's Group Athletic Centre. The building was demolished in that year.</p>", {maxWidth: 250})
+        
+        facing_bison_bldg.getPopup().on('remove', function() {
+            map_init.panTo(facing_bison_bldg_coords)
+        });
+
+        facing_bison_east_gym.bindPopup("<strong>Bison East Gym</strong><br>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?", {maxWidth: 250})
+        
+        facing_bison_east_gym.getPopup().on('remove', function() {
+            map_init.panTo(facing_bison_east_gym_coords)
+        });
+
+        facing_bus_depot.bindPopup("<strong>Bookstore/Bus Depot</strong><br>In an odd combination of functions, you could browse books while waiting for the bus at the Bookstore/Bus Depot that existed before University Centre was built.", {maxWidth: 250})
+        
+        facing_bus_depot.getPopup().on('remove', function() {
+            map_init.panTo(facing_bus_depot_coords)
+        });
+
+        facing_NE_eng_bldg.bindPopup("<strong>Northeast Engineering Building</strong><br><p>Built in 1949 and originally developed as a drafting annex, the Northeast Engineering Building served until 2004. All three Engineering buildings were interconnected, but  the NE Wing was a half-storey different than the other buildings. To address modern accessibility needs, it was decided that the best solution was to tear it down. It was replaced by the new EITC-E2 Building in 2005.</p><p>The NE Wing was home to Room 229, a study hall used by generations of engineering students and which also served as a site for writing final exams. In honour of the old room, the study hall in the new E2 building was given the same  number.</p>", {maxWidth: 250})
+
+        facing_NE_eng_bldg.getPopup().on('remove', function() {
+            map_init.panTo(facing_NE_eng_bldg_coords)
+        });
+
+        
+        function getPosition(position) {
+            // console.log(position)
+            lat = position.coords.latitude
+            long = position.coords.longitude
+            accuracy = position.coords.accuracy
+            altitude = position.coords.altitude
+
+            if (marker) {
+                map_init.removeLayer(marker)
+            }
+
+            if (circle) {
+                map_init.removeLayer(circle)
+            }
+
+            marker = L.marker([lat, long])
+            circle = L.circle([lat, long], { radius: accuracy })
+
+            var featureGroup = L.featureGroup([marker, circle]).addTo(map_init)
+
+           
+            var to = marker.getLatLng()
+            
+            // Show distances to markers.
+            var from = facing_alumni_house.getLatLng()
+            facing_alumni_house.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
+            
+            from = facing_admin_bldg.getLatLng()
+            facing_admin_bldg.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
+            
+            from = facing_tache_hall.getLatLng()
+            facing_tache_hall.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
+            
+            from = facing_tier.getLatLng()
+            facing_tier.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
+            
+            from = facing_hutj.getLatLng()
+            facing_hutj.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
+            
+            from = facing_home_ec.getLatLng()
+            facing_home_ec.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
+            
+            from = facing_bison_gardens.getLatLng()
+            facing_bison_gardens.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
+            
+            from = facing_buller.getLatLng()
+            facing_buller.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
+            
+            from = facing_dairy_science.getLatLng()
+            facing_dairy_science.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
+            
+            from = facing_stock_judging_pavilion.getLatLng()
+            facing_stock_judging_pavilion.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
+            
+            from = facing_ice_plant.getLatLng()
+            facing_ice_plant.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
+            
+            from = facing_bison_bldg.getLatLng()
+            facing_bison_bldg.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
+            
+            from = facing_bison_east_gym.getLatLng()
+            facing_bison_east_gym.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
+            
+            from = facing_bus_depot.getLatLng()
+            facing_bus_depot.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
+            
+            from = facing_NE_eng_bldg.getLatLng()
+            facing_NE_eng_bldg.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
+        
+
+            console.log("Distance is: "+(from.distanceTo(to)))
+            console.log("Your coordinate is: Lat: " + lat + " Long: " + long + " Accuracy: " + accuracy)
+            console.log("Altitude= "+altitude)
+        }
+    </script>
+
+</body>
+
