@@ -91,11 +91,21 @@
             position-reader>
         </a-camera> -->
 
-        <a-camera id="camera"
+        <!-- <a-camera id="camera"
             gps-camera="maxDistance: 200"
             rotation-reader 
             far="100000">
+        </a-camera> -->
+
+        <!-- Added smoothingFactor to fix jittery motion -->
+        <a-camera id="camera"
+        look-controls-enabled="false"
+        arjs-look-controls="smoothingFactor: 0.1"
+        gps-camera="maxDistance: 6000"
+        rotation-reader 
+        far="100000">
         </a-camera>
+
 
     </a-scene>
 </div>
