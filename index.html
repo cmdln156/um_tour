@@ -7,7 +7,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>University of Manitoba Lost Places AR Tour</title>
+    <title>U of M AR Tour</title>
 
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script> 
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
@@ -47,9 +47,13 @@
 
 
 <div id="myEmbeddedScene">
-    <a-scene vr-mode-ui="enabled: false" embedded 
-        arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
+    <!-- if 'embedded' is used in arjs, the map will not zoom in initially (shows global view)-->
+    <!-- But if 'embedded' is not used, the images in <a-image> do not have the correct aspect ratio, even when width and height are specified correctly. E.g., Alumni House needs to be set to width: 40 height: 10 to look OK, when the correct aspect ratio should be 1.5 (600 x 400 image). This is a known issue. See https://github.com/AR-js-org/AR.js/issues/101.-->
 
+    <!-- <a-scene vr-mode-ui="enabled: false" embedded -->
+    <a-scene vr-mode-ui="enabled: false" embedded height: 400px width: 300px
+        arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
+        
         <!-- <a-text value="Practice House" gps-entity-place="latitude: 49.80862; longitude: -97.130091;" position="0 320 0"
             rotation="0 0 0" font="roboto" color="white" look-at="#camera" side="double" align="center"
             width="100" transparent="false" opacity="1.0">
@@ -69,18 +73,20 @@
         </a-assets>
 
         
-        <!-- <a-image src="#Alumni_House_img" gps-entity-place="latitude: 49.80862; longitude: -97.130091;"  look-at="[gps-camera]" position="0 240 0" width="133" height="100"  opacity="0.7"  alpha-test="0.5" shader="standard" transparent="true" visible="" scale = "0.2 0.2 0.2"></a-image> -->
+        <!-- width and height in a-image are in metres, not pixels -->
 
-        <!-- School: 49.803551, -97.166274 -->
-        <a-image src="#Alumni_House_img" gps-entity-place="latitude: 49.803551; longitude: -97.166274;"  look-at="[gps-camera]" position="0 220 0" width="133" height="100"  opacity="0.7"  alpha-test="0.5" shader="standard" transparent="true" visible="" scale = "0.2 0.2 0.2"></a-image>
+        <a-image src="#Alumni_House_img" gps-entity-place="latitude: 49.80862; longitude: -97.130091;"  look-at="[gps-camera]" position="0 215 0" width="20" height="13"  opacity="0.7"  alpha-test="0.5" shader="standard" transparent="true" visible="" scale = "1 1 1"></a-image>
 
-        <a-image src="#Bison_Gardens_img" gps-entity-place="latitude: 49.806167; longitude: -97.132582;"  look-at="[gps-camera]" position="0 240 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
-        <a-image src="#Water_Tower_img" gps-entity-place="latitude: 49.808834; longitude: -97.127798;"  look-at="[gps-camera]" position="0 240 0" width="77" height="100"  opacity="0.8"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
-        <a-image src="#Bus_Depot_img" gps-entity-place="latitude: 49.809889; longitude: -97.133993;"  look-at="[gps-camera]" position="0 240 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
-        <a-image src="#Avenue_of_Elms_img" gps-entity-place="latitude: 49.809121; longitude: -97.134047;"  look-at="[gps-camera]" position="0 240 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
-        <a-image src="#Arctic_Ice_Plant_img" gps-entity-place="latitude: 49.805743; longitude: -97.13164;"  look-at="[gps-camera]" position="0 240 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
-        <a-image src="#Hut_J_img" gps-entity-place="latitude: 49.807581; longitude: -97.132917;"  look-at="[gps-camera]" position="0 240 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
-        <a-image src="#NE_Engineering_img" gps-entity-place="latitude: 49.808609; longitude: -97.133951;"  look-at="[gps-camera]" position="0 240 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
+        <!-- Location of school for testing purposes. -->
+        <!-- <a-image src="#Alumni_House_img" gps-entity-place="latitude: 49.803551; longitude: -97.166274;"  look-at="[gps-camera]" position="0 225 0" width="20" height="13" opacity="0.7"  alpha-test="0.5" shader="standard" transparent="true" visible="" scale = "1 1 1"></a-image> -->
+
+        <a-image src="#Bison_Gardens_img" gps-entity-place="latitude: 49.806167; longitude: -97.132582;"  look-at="[gps-camera]" position="0 215 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
+        <a-image src="#Water_Tower_img" gps-entity-place="latitude: 49.808834; longitude: -97.127798;"  look-at="[gps-camera]" position="0 215 0" width="77" height="100"  opacity="0.8"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
+        <a-image src="#Bus_Depot_img" gps-entity-place="latitude: 49.809889; longitude: -97.133993;"  look-at="[gps-camera]" position="0 215 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
+        <a-image src="#Avenue_of_Elms_img" gps-entity-place="latitude: 49.809596; longitude: -97.132699;"  look-at="[gps-camera]" position="0 215 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
+        <a-image src="#Arctic_Ice_Plant_img" gps-entity-place="latitude: 49.805743; longitude: -97.13164;"  look-at="[gps-camera]" position="0 215 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
+        <a-image src="#Hut_J_img" gps-entity-place="latitude: 49.807581; longitude: -97.132917;"  look-at="[gps-camera]" position="0 215 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
+        <a-image src="#NE_Engineering_img" gps-entity-place="latitude: 49.808609; longitude: -97.133951;"  look-at="[gps-camera]" position="0 215 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
 
         <!-- local image paths don't work. Must use https://  URLs. because of cross-origin policy. -->        
         
@@ -97,12 +103,12 @@
             far="100000">
         </a-camera> -->
 
-        <!-- Added smoothingFactor to fix jittery motion -->
+        <!-- Added smoothingFactor and gpsMinDistance to try to fix jittery motion -->
         <a-camera id="camera"
         look-controls-enabled="false"
         arjs-look-controls="smoothingFactor: 0.1"
-        gps-camera="maxDistance: 6000"
-        rotation-reader 
+        gps-camera="maxDistance: 6000; gpsMinDistance: 10;"
+        rotation-reader
         far="100000">
         </a-camera>
 
@@ -115,7 +121,7 @@
     <!-- Show Leaflet map -->
     <!-- from real-time_locationtracker.html -->
     
-    <div id="map"></div>
+    <div id="map">height: 400; width:300 </div>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
@@ -125,13 +131,12 @@
         var map_init = L.map('map', {
             minzoom: 5,
             maxzoom: 18,
-            zoom: 15,
+            zoom: 14,
             center: [49.809596, -97.132699],
         });
 
         
-        //var corner1 = L.latLng( 49.802780, -97.138176), corner2 = L.latLng( 49.813876, -97.131187)
-        var corner1 = [49.802780, -97.138176], corner2 = [49.813876, -97.131187]
+        var corner1 = L.latLng( 49.802780, -97.138176), corner2 = L.latLng( 49.813876, -97.131187)
 
         bounds = L.latLngBounds(corner1, corner2)
         map_init.fitBounds(bounds)
@@ -148,17 +153,36 @@
         } else {
             setInterval(() => {
                 navigator.geolocation.getCurrentPosition(getPosition)
-            }, 10000);
+            }, 5000);
         };
                 
         //Add compass rose
-        //var comp = new L.Control.Compass({autoActive: true, showDigit:true});
-        //map_init.addControl(comp)
+        var comp = new L.Control.Compass({autoActive: true, showDigit:true});
+        map_init.addControl(comp)
 
         var marker, facing_alumni_house, facing_admin_bldg, facing_tache_hall, facing_tier, facing_hutj, facing_home_ec, facing_bison_gardens, facing_buller, facing_dairy_science, facing_stock_judging_pavilion, facing_ice_plant, facing_bison_bldg, facing_bison_east_gym, facing_bus_depot, facing_NE_eng_bldg, circle, lat,long, accuracy, altitude;
 
         //Latitude and longitude of placemarks.
         var facing_alumni_house_coords, facing_admin_bldg_coords,facing_tache_hall_coords,facing_tier_coords,facing_hutj_coords,facing_home_ec_coords,facing_bison_gardens_coords,facing_buller_coords,facing_dairy_science_coords,facing_stock_judging_pavilion_coords,facing_ice_plant_coords,facing_bison_bldg_coords,facing_bison_east_gym_coords,facing_bus_depot_coords,facing_NE_eng_bldg_coords;
+
+        //Add green and red markers: https://github.com/pointhi/leaflet-color-markers
+        var greenIcon = new L.Icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+
+        var redIcon = new L.Icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
 
         facing_alumni_house_coords = [49.808967, -97.130411]
         facing_admin_bldg_coords = [49.809121, -97.134047]
@@ -293,7 +317,6 @@
 
         
         function getPosition(position) {
-            // console.log(position)
             lat = position.coords.latitude
             long = position.coords.longitude
             accuracy = position.coords.accuracy
@@ -307,12 +330,16 @@
                 map_init.removeLayer(circle)
             }
 
-            marker = L.marker([lat, long])
+            //Marker for user location and radius of accuracy.
+            marker = L.marker([lat, long],{icon: redIcon})
+            marker.bindTooltip("Me",{permanent: true, direction: 'auto'})
             circle = L.circle([lat, long], { radius: accuracy })
+
+            //Pan to user location.
+            //map_init.panTo([lat,long])
 
             var featureGroup = L.featureGroup([marker, circle]).addTo(map_init)
 
-           
             var to = marker.getLatLng()
             
             // Show distances to markers.
@@ -362,11 +389,10 @@
             facing_NE_eng_bldg.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
         
 
-            console.log("Distance is: "+(from.distanceTo(to)))
+            /* console.log("Distance is: "+(from.distanceTo(to)))
             console.log("Your coordinate is: Lat: " + lat + " Long: " + long + " Accuracy: " + accuracy)
-            console.log("Altitude= "+altitude)
+            console.log("Altitude= "+altitude) */
         }
     </script>
 
 </body>
-
