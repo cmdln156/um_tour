@@ -48,10 +48,10 @@
 
 <div id="myEmbeddedScene">
     <!-- if 'embedded' is used in arjs, the map will not zoom in initially (shows global view)-->
-    <!-- But if 'embedded' is not used, the images in <a-image> do not have the correct aspect ratio, even when width and height are specified correctly. E.g., Alumni House needs to be set to width: 40 height: 10 to look OK, when the correct aspect ratio should be 1.5 (600 x 400 image). This is a known issue. See https://github.com/AR-js-org/AR.js/issues/101.-->
+    <!-- But if 'embedded' is not used, the images in <a-image> do not have the correct aspect ratio, even when width and height are specified correctly. E.g., Alumni House needs to be set to width: 40 height: 10 to look OK, when the correct aspect ratio should be 1.5 (600 x 400 image). This is a known issue. See https://github.com/AR-js-org/AR.js/issues/101. If 'embedded' is used, the map will not zoom in initially. -->
 
-    <!-- <a-scene vr-mode-ui="enabled: false" embedded -->
-    <a-scene vr-mode-ui="enabled: false" embedded height: 400px width: 300px
+    <!-- <a-scene vr-mode-ui="enabled: false" embedded height: 400px width: 300px -->
+    <a-scene vr-mode-ui="enabled: false"  
         arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
         
         <!-- <a-text value="Practice House" gps-entity-place="latitude: 49.80862; longitude: -97.130091;" position="0 320 0"
@@ -75,18 +75,18 @@
         
         <!-- width and height in a-image are in metres, not pixels -->
 
-        <a-image src="#Alumni_House_img" gps-entity-place="latitude: 49.80862; longitude: -97.130091;"  look-at="[gps-camera]" position="0 215 0" width="20" height="13"  opacity="0.7"  alpha-test="0.5" shader="standard" transparent="true" visible="" scale = "1 1 1"></a-image>
+        <a-image src="#Alumni_House_img" gps-entity-place="latitude: 49.80862; longitude: -97.130091;"  look-at="[gps-camera]" position="0 210 0" width="40" height="13"  opacity="0.7"  alpha-test="0.5" shader="standard" transparent="true" visible="" scale = "1 1 1"></a-image>
 
         <!-- Location of school for testing purposes. -->
         <!-- <a-image src="#Alumni_House_img" gps-entity-place="latitude: 49.803551; longitude: -97.166274;"  look-at="[gps-camera]" position="0 225 0" width="20" height="13" opacity="0.7"  alpha-test="0.5" shader="standard" transparent="true" visible="" scale = "1 1 1"></a-image> -->
 
-        <a-image src="#Bison_Gardens_img" gps-entity-place="latitude: 49.806167; longitude: -97.132582;"  look-at="[gps-camera]" position="0 215 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
-        <a-image src="#Water_Tower_img" gps-entity-place="latitude: 49.808834; longitude: -97.127798;"  look-at="[gps-camera]" position="0 215 0" width="77" height="100"  opacity="0.8"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
-        <a-image src="#Bus_Depot_img" gps-entity-place="latitude: 49.809889; longitude: -97.133993;"  look-at="[gps-camera]" position="0 215 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
-        <a-image src="#Avenue_of_Elms_img" gps-entity-place="latitude: 49.809596; longitude: -97.132699;"  look-at="[gps-camera]" position="0 215 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
-        <a-image src="#Arctic_Ice_Plant_img" gps-entity-place="latitude: 49.805743; longitude: -97.13164;"  look-at="[gps-camera]" position="0 215 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
-        <a-image src="#Hut_J_img" gps-entity-place="latitude: 49.807581; longitude: -97.132917;"  look-at="[gps-camera]" position="0 215 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
-        <a-image src="#NE_Engineering_img" gps-entity-place="latitude: 49.808609; longitude: -97.133951;"  look-at="[gps-camera]" position="0 215 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
+        <a-image src="#Bison_Gardens_img" gps-entity-place="latitude: 49.806167; longitude: -97.132582;"  look-at="[gps-camera]" position="0 210 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
+        <a-image src="#Water_Tower_img" gps-entity-place="latitude: 49.808834; longitude: -97.127798;"  look-at="[gps-camera]" position="0 210 0" width="77" height="100"  opacity="0.8"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
+        <a-image src="#Bus_Depot_img" gps-entity-place="latitude: 49.809889; longitude: -97.133993;"  look-at="[gps-camera]" position="0 210 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
+        <a-image src="#Avenue_of_Elms_img" gps-entity-place="latitude: 49.809596; longitude: -97.132699;"  look-at="[gps-camera]" position="0 210 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
+        <a-image src="#Arctic_Ice_Plant_img" gps-entity-place="latitude:  49.805979; longitude: -97.130951;"  look-at="[gps-camera]" position="0 210 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
+        <a-image src="#Hut_J_img" gps-entity-place="latitude: 49.807581; longitude: -97.132917;"  look-at="[gps-camera]" position="0 210 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
+        <a-image src="#NE_Engineering_img" gps-entity-place="latitude: 49.808609; longitude: -97.133951;"  look-at="[gps-camera]" position="0 210 0" width="133" height="100"  opacity="0.7"  alpha-test="0.2" shader="standard" transparent="true" visible="" scale = "0.5 0.5 0.5"></a-image> 
 
         <!-- local image paths don't work. Must use https://  URLs. because of cross-origin policy. -->        
         
@@ -194,7 +194,7 @@
         facing_buller_coords = [49.810295, -97.133286]
         facing_dairy_science_coords = [49.807752, -97.133312]
         facing_stock_judging_pavilion_coords = [49.807502, -97.134154]
-        facing_ice_plant_coords = [49.806747, -97.131239]
+        facing_ice_plant_coords = [ 49.807786, -97.129692]
         facing_bison_bldg_coords = [49.808663, -97.135675]
         facing_bison_east_gym_coords = [49.809909, -97.136263]
         facing_bus_depot_coords = [49.809832, -97.133768]
@@ -202,17 +202,17 @@
 
         facing_alumni_house = L.marker(facing_alumni_house_coords).addTo(map_init)
         facing_admin_bldg = L.marker(facing_admin_bldg_coords).addTo(map_init)
-        facing_tache_hall = L.marker(facing_tache_hall_coords).addTo(map_init)
-        facing_tier = L.marker(facing_tier_coords).addTo(map_init)
+        //facing_tache_hall = L.marker(facing_tache_hall_coords).addTo(map_init)
+        //facing_tier = L.marker(facing_tier_coords).addTo(map_init)
         facing_hutj = L.marker(facing_hutj_coords).addTo(map_init)
-        facing_home_ec = L.marker(facing_home_ec_coords).addTo(map_init)
+        //facing_home_ec = L.marker(facing_home_ec_coords).addTo(map_init)
         facing_bison_gardens = L.marker( facing_bison_gardens_coords).addTo(map_init)
-        facing_buller = L.marker(facing_buller_coords).addTo(map_init)
-        facing_dairy_science = L.marker(facing_dairy_science_coords).addTo(map_init)
-        facing_stock_judging_pavilion = L.marker(facing_stock_judging_pavilion_coords).addTo(map_init)
+        //facing_buller = L.marker(facing_buller_coords).addTo(map_init)
+        //facing_dairy_science = L.marker(facing_dairy_science_coords).addTo(map_init)
+        //facing_stock_judging_pavilion = L.marker(facing_stock_judging_pavilion_coords).addTo(map_init)
         facing_ice_plant = L.marker(facing_ice_plant_coords).addTo(map_init)
         facing_bison_bldg = L.marker(facing_bison_bldg_coords).addTo(map_init)
-        facing_bison_east_gym = L.marker(facing_bison_east_gym_coords).addTo(map_init)
+        //facing_bison_east_gym = L.marker(facing_bison_east_gym_coords).addTo(map_init)
         facing_bus_depot = L.marker( facing_bus_depot_coords).addTo(map_init)
         facing_NE_eng_bldg = L.marker(facing_NE_eng_bldg_coords).addTo(map_init)
     
@@ -237,7 +237,7 @@
             map_init.panTo(facing_admin_bldg_coords)
         });
 
-        facing_tache_hall.bindPopup("<strong>Tache Hall</strong><br>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?", {maxWidth: 250})
+        /* facing_tache_hall.bindPopup("<strong>Tache Hall</strong><br>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?", {maxWidth: 250})
         
         facing_tache_hall.getPopup().on('remove', function() {
             map_init.panTo(facing_tache_hall_coords)
@@ -247,7 +247,7 @@
         
         facing_tier.getPopup().on('remove', function() {
             map_init.panTo(facing_tier_coords)
-        });
+        }); */
 
         facing_hutj.bindPopup("<strong>Hut J</strong><br><p>Hut J, on the site of the present Arthur Mauro residence, was built during WW II to serve as a cafeteria, since Taché Hall (where the dining area was normally located) had been commandeered by the military. One side of the cafeteria was for students and the other side for staff. Although it was intended as a temporary building, constructed with cheap simulated brick siding, Hut J lasted for over 40 years, despite being apparently condemned twice. After the war, it was used for classes by the Faculty of Education, and then it acted as studio space for the Faculty of Architecture. Hut J was torn down in the '80s.</p><p>Hut J was one of several temporary buildings constructed during WW II. Another hut was on the site of the present-day Mary Speechly residence and was used by the Faculty of Pharmacy. There were several more huts near the river, one of which served as the Faculty Club. All of them are gone now.</p>", {maxWidth: 250})
         
@@ -255,11 +255,11 @@
             map_init.panTo(facing_hutj_coords)
         });
 
-        facing_home_ec.bindPopup("<strong>Home Economics Building</strong><br>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?", {maxWidth: 200})
+       /*  facing_home_ec.bindPopup("<strong>Home Economics Building</strong><br>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?", {maxWidth: 200})
         
         facing_home_ec.getPopup().on('remove', function() {
             map_init.panTo(facing_home_ec_coords)
-        });
+        }); */
 
         facing_bison_gardens.bindPopup("<strong>Bison Gardens</strong><br><p>Looking like an oblong UFO from the sky, Bison Gardens was originally a skating rink at the old River Park (in the Riverview neighbourhood). The military bought it during WW II, had it dismantled, and floated the pieces up the Red River to the campus. There was one slight hitch: the giant support beams for the roof couldn't navigate some of the narrow bends in the river, so they ended up being transported by truck.</p><p>During the war, the building was used as a drill hall by the military. Afterwards, it was converted to classroom space for a few years and then it was used as storage. It was turned back into a skating rink in the 1950s.</p><p>Bison Gardens had a bit of a rodent problem -- it wasn't uncommon to find dead rats stuck to the ice in the morning. The chilly facility was also purportedly used for storing monkey cadavers for research use!</p><p>The building was torn down in 1982 and replaced by the Max Bell Centre.</p>", {maxWidth: 250})
         
@@ -267,7 +267,7 @@
             map_init.panTo(facing_bison_gardens_coords)
         });
 
-        facing_buller.bindPopup("<strong>Buller Building</strong><br>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?", {maxWidth: 250})
+        /* facing_buller.bindPopup("<strong>Buller Building</strong><br>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?", {maxWidth: 250})
         
         facing_buller.getPopup().on('remove', function() {
             map_init.panTo(facing_buller_coords)
@@ -284,7 +284,7 @@
         facing_stock_judging_pavilion.getPopup().on('remove', function() {
             map_init.panTo(facing_stock_judging_pavilion_coords)
         });
-
+ */
         facing_ice_plant.bindPopup("<strong>Arctic Ice Plant</strong><br><p>Back in the days before fridges, people had iceboxes in their homes, which required a daily delivery of ice. One local ice supplier was the Arctic Ice Company, which had an ice cutting and storage facility here near the river starting in the early 1910s. Ice was cut from the river in the winter and moved on a conveyor system to a huge warehouse where they were packed in sawdust and stored for later sale.<p><p>The company initially cut ice near the Norwood bridge, but as the water became increasingly polluted due to sewers emptying into the river, the company moved its cutting operations further south to this location.</p><p>Arctic Ice closed its facility here in the mid-1930s and the property was bought by the U of M in 1939 for $1,100.</p>", {maxWidth: 250})
         
         facing_ice_plant.getPopup().on('remove', function() {
@@ -297,11 +297,11 @@
             map_init.panTo(facing_bison_bldg_coords)
         });
 
-        facing_bison_east_gym.bindPopup("<strong>Bison East Gym</strong><br>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?", {maxWidth: 250})
+       /*  facing_bison_east_gym.bindPopup("<strong>Bison East Gym</strong><br>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?", {maxWidth: 250})
         
         facing_bison_east_gym.getPopup().on('remove', function() {
             map_init.panTo(facing_bison_east_gym_coords)
-        });
+        }); */
 
         facing_bus_depot.bindPopup("<strong>Bookstore/Bus Depot</strong><br>In an odd combination of functions, you could browse books while waiting for the bus at the Bookstore/Bus Depot that existed before University Centre was built.", {maxWidth: 250})
         
@@ -349,29 +349,30 @@
             from = facing_admin_bldg.getLatLng()
             facing_admin_bldg.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
             
-            from = facing_tache_hall.getLatLng()
+            /* from = facing_tache_hall.getLatLng()
             facing_tache_hall.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
             
             from = facing_tier.getLatLng()
-            facing_tier.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
+            facing_tier.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init) */
             
             from = facing_hutj.getLatLng()
             facing_hutj.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
             
-            from = facing_home_ec.getLatLng()
+            /* from = facing_home_ec.getLatLng()
             facing_home_ec.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
-            
+             */
+
             from = facing_bison_gardens.getLatLng()
             facing_bison_gardens.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
             
-            from = facing_buller.getLatLng()
-            facing_buller.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
+            /* from = facing_buller.getLatLng()
+            facing_buller.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init) */
             
-            from = facing_dairy_science.getLatLng()
+            /* from = facing_dairy_science.getLatLng()
             facing_dairy_science.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
             
             from = facing_stock_judging_pavilion.getLatLng()
-            facing_stock_judging_pavilion.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
+            facing_stock_judging_pavilion.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init) */
             
             from = facing_ice_plant.getLatLng()
             facing_ice_plant.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
@@ -379,8 +380,8 @@
             from = facing_bison_bldg.getLatLng()
             facing_bison_bldg.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
             
-            from = facing_bison_east_gym.getLatLng()
-            facing_bison_east_gym.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
+            /* from = facing_bison_east_gym.getLatLng()
+            facing_bison_east_gym.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init) */
             
             from = facing_bus_depot.getLatLng()
             facing_bus_depot.bindTooltip((from.distanceTo(to)).toFixed(0)+" m",{permanent: true, direction: 'right'}).addTo(map_init)
